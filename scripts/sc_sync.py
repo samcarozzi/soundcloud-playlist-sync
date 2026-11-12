@@ -224,7 +224,6 @@ def main():
             log(f"Auth token OK (logged in as {user})")
     name, tracks = resolve_playlist(a.url, cid, token if token_ok else None)
     out = Path(a.out).expanduser() if a.out else Path(a.root).expanduser() / safe_name(name)
-    out.mkdir(parents=True, exist_ok=True)
     log(f"Playlist: {name} ({len(tracks)} tracks) -> {out}")
     if not token_ok and not a.skip_scdl and not a.allow_no_auth:
         log("ABORTING: no valid SoundCloud auth token. Refresh it, or rerun with --allow-no-auth.")
@@ -232,6 +231,7 @@ def main():
         sys.exit(2)
     if not token_ok:
         token = None
+    out.mkdir(parents=True, exist_ok=True)
 
     if not a.skip_scdl:
         cmd = ["scdl", "-l", a.url, "--path", str(out), "--no-playlist-folder", "-c",
