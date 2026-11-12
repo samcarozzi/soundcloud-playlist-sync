@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.cfg
+.sync-report.*
+*.m4a
+*.mp3
+*.wav
+*.flac
